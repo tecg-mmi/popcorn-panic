@@ -2,7 +2,7 @@ export const settings = {
     canvas: {
         id: 'popcorn',
     },
-    sprite: "sprite.png",
+    sprite: "sprite--test.png",
     popcorns: [
         {
             sx: 0,
@@ -109,7 +109,7 @@ export const settings = {
             dh: 25
         }, {
             sx: 100,
-            sy: 125,
+            sy: 25,
             sw: 25,
             sh: 25,
             dx: 0,
@@ -125,9 +125,9 @@ export const settings = {
             dy: 0,
             dw: 25,
             dh: 25
-        },{
+        }, {
             sx: 125,
-            sy: 125,
+            sy: 25,
             sw: 25,
             sh: 25,
             dx: 0,
@@ -139,11 +139,11 @@ export const settings = {
     projectiles: {
         magnitude: {
             min: 1,
-            max: 6
+            max: 5
         },
         angle: {
-            min: -0.5,
-            max: 0.5
+            min: -0.3,
+            max: 0.3
         },
         acceleration: {
             min: 0.01,

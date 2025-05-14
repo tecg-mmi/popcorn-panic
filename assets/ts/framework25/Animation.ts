@@ -33,6 +33,7 @@ export class Animation {
 
     private animate() {
         this.requestAnimationFrameID = requestAnimationFrame(this.animate.bind(this));
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         for (let i = 0; i < this.iAnimatables.length; i++) {
