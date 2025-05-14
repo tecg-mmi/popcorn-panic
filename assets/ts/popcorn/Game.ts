@@ -1,6 +1,7 @@
 import {settings} from "./settings";
 import {Projectile} from "./Projectile";
 import {Animation} from "../framework25/Animation";
+import {Collision} from "../framework25/helpers/Collision";
 
 export class Game {
     private canvas: HTMLCanvasElement;
@@ -15,14 +16,45 @@ export class Game {
         this.sprite = new Image();
         this.sprite.src = settings.sprite;
         this.sprite.addEventListener('load', () => {
+            this.animation.start();
+        });
+        this.canvas.addEventListener('click', (evt: MouseEvent) => {
+            const correctedX = evt.clientX - this.canvas.getBoundingClientRect().x;
+            const correctedY = evt.clientY - this.canvas.getBoundingClientRect().y;
+            this.animation.iAnimatables.forEach((projectile: Projectile) => {
+                if (Collision.isPointInRotatedRectangle(
+                    projectile.frame.dw,
+                    projectile.frame.dh,
+                    projectile.position,
+                    projectile.rotation,
+                    {
+                        x: correctedX,
+                        y: correctedY,
+                    }
+                )) {
 
+                    if (projectile.hiddenNumber < 0) {
+                        this.animation.stop();
+                    } else {
+                        console.log("À vous de jouer !! ")
+                    }
+
+                }
+            })
         })
         this.generatePopcorns();
+        this.generateCorns();
     }
 
     private generatePopcorns() {
         for (let i = 0; i < settings.popcorns.length; i++) {
-            this.animation.registeriAnimatable(new Projectile(this.ctx, this.sprite, settings.popcorns[i], 0));
+            this.animation.registeriAnimatable(new Projectile(this.ctx, this.canvas, this.sprite, settings.popcorns[i], 0, i));
+        }
+    }
+
+    private generateCorns() {
+        for (let i = 0; i < settings.corns.length; i++) {
+            this.animation.registeriAnimatable(new Projectile(this.ctx, this.canvas, this.sprite, settings.corns[i], 0, -1));
         }
     }
 }
