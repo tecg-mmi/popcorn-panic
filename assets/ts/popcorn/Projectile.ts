@@ -22,6 +22,11 @@ export class Projectile extends DrawFrame implements iAnimatable {
         this.hiddenNumber = hiddenNumber;
         this.canvas = canvas;
 
+        this.initRandomValues();
+
+    }
+
+    private initRandomValues() {
         this.clockWise = Math.random() > 0.5;
         this.speed = Vector.fromAngle(
             randomFloat(settings.projectiles.angle.min, settings.projectiles.angle.max),
@@ -37,10 +42,13 @@ export class Projectile extends DrawFrame implements iAnimatable {
             x: 0,
             y: randomFloat(settings.projectiles.acceleration.min, settings.projectiles.acceleration.max),
         })
-
     }
 
     animate(): void {
+        if (this.position.y > this.canvas.height + this.frame.dh) {
+            this.initRandomValues();
+        }
+
         this.speed.add(this.acceleration);
         this.position.add(this.speed);
 

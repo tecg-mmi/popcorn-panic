@@ -2,7 +2,7 @@ export const settings = {
     canvas: {
         id: 'popcorn',
     },
-    sprite: "sprite--test.png",
+    sprite: "sprite.png",
     popcorns: [
         {
             sx: 0,
