@@ -1,1 +1,3 @@
-console.log("Hello World!");
+import {Game} from "./popcorn/Game";
+
+new Game();
