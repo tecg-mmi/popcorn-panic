@@ -8,11 +8,11 @@ import {settings} from "./settings";
 export class Projectile extends DrawFrame implements iAnimatable {
     shouldBeRemoved: boolean;
     private direction: number;
-    private hiddenNumber: number;
+    public hiddenNumber: number;
     private speed: Vector;
     private acceleration: Vector;
     private clockWise: Boolean;
-    private position: Vector;
+    public position: Vector;
     private canvas: HTMLCanvasElement;
 
 

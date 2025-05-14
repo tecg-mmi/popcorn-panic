@@ -1,6 +1,7 @@
 import {settings} from "./settings";
 import {Animation} from "../framework25/Animation";
 import {Projectile} from "./Projectile";
+import {Collision} from "../framework25/helpers/Collision";
 
 export class Game {
     private canvas: HTMLCanvasElement;
@@ -19,6 +20,28 @@ export class Game {
         console.log(this.animation.iAnimatables);
         this.sprite.addEventListener("load", () => {
             this.animation.start();
+        });
+
+        this.canvas.addEventListener("click", (evt: MouseEvent) => {
+            const correctedX = evt.clientX - this.canvas.getBoundingClientRect().x;
+            const correctedY = evt.clientY - this.canvas.getBoundingClientRect().y;
+
+            this.animation.iAnimatables.forEach((projectile: Projectile) => {
+                if (Collision.isPointInRotatedRectangle(
+                    projectile.frame.dw,
+                    projectile.frame.dh,
+                    projectile.position,
+                    projectile.rotation,
+                    {x: correctedX, y: correctedY},
+                )) {
+                    if (projectile.hiddenNumber < 0) {
+                        this.animation.stop();
+                    } else {
+                        console.log("Yeah")
+                    }
+                }
+            });
+
         })
     }
 
